@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    #region properties
+    public float hp = 100;
+    #endregion
     #region Movement
     public Rigidbody rb;
     public float speed = 7;
@@ -11,6 +15,7 @@ public class Player : MonoBehaviour
     bool canPush = true;
     float dashTime = 1;
     bool dashing = false;
+    public float left,rigth;
     #endregion
 
     #region timer
@@ -20,11 +25,14 @@ public class Player : MonoBehaviour
     #region Attack
     public List<Transform> firePoints;
     public GameObject bullet;
-    bool doubleAttack = false;
+    public bool doubleAttack = false;
     public float timerShoot = 0;
     bool canShoot = true;
     #endregion
-
+    void Start() 
+    {
+        
+    }
     void Update()
     {
         Move();
@@ -41,7 +49,14 @@ public class Player : MonoBehaviour
         float x = Input.GetAxis("Horizontal");
         Vector3 movementDirection = new Vector3(x, 0, 0);
         movementDirection.Normalize();
-        transform.Translate(movementDirection * speed * Time.deltaTime, Space.World);//Moverse
+        if(transform.position.x >= left && transform.position.x <= rigth){
+            transform.Translate(movementDirection * speed * Time.deltaTime, Space.World);//Moverse
+        } else if(transform.position.x < left){
+            transform.position = new Vector3(left,transform.position.y,transform.position.z);
+        }else if(transform.position.x > rigth){
+            transform.position = new Vector3(rigth,transform.position.y,transform.position.z);
+        }
+        
 
     }
 
@@ -69,9 +84,22 @@ public class Player : MonoBehaviour
             if(!doubleAttack){
                 Instantiate(bullet,firePoints[0].position,firePoints[0].rotation);
             }
+            else{
+                foreach(Transform a in firePoints){
+                    Instantiate(bullet,a.position,a.rotation);
+                }
+            }
             canShoot = false;
         }
         
+    }
+
+    public void TakeDamage(float damage){
+        hp -= damage;
+        Debug.Log("Player dañado");
+        if(hp <= 0){
+            SceneManager.LoadScene("LoseScreen");
+        }
     }
 
     IEnumerator ActivateDash()

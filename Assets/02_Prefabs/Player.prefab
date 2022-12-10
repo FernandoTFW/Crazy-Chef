@@ -253,7 +253,7 @@ GameObject:
   - component: {fileID: 3444580778050180133}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -292,11 +292,15 @@ MonoBehaviour:
   rb: {fileID: 5260099067946074013}
   speed: 7
   dashForce: 7
+  left: -16
+  rigth: 11
   firePoints:
   - {fileID: 59329251034493113}
   - {fileID: 3915762401557415680}
   - {fileID: 7598748999987319850}
   bullet: {fileID: 846572461093720073, guid: 3ae00bd60aaf85540876797cedf58860, type: 3}
+  doubleAttack: 0
+  timerShoot: 0
 --- !u!54 &5260099067946074013
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -311,7 +315,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 116
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!65 &3444580778050180133
 BoxCollider:

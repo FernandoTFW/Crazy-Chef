@@ -5,8 +5,7 @@ using UnityEngine;
 public class DiagonalMovement : MonoBehaviour
 {
     public float moveSpeed = 20;
-    public bool right = true;
-
+    public bool right;
     private void FixedUpdate() {
         DiagonalMove();
     }

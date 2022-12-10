@@ -12,6 +12,14 @@ public class SinMoveEnemy : MonoBehaviour
     void Start()
     {
         centerZ = transform.position.x;
+        int i = Random.Range(0,2);
+        if(i == 0){
+            inverted = true;
+        } 
+        else
+        {
+            inverted = false;
+        }
     }
 
     // Update is called once per frame
