@@ -16,19 +16,22 @@ public class Player : MonoBehaviour
     #region timer
     float timer = 0;
     #endregion
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+    #region Attack
+    public List<Transform> firePoints;
+    public GameObject bullet;
+    bool doubleAttack = false;
+    public float timerShoot = 0;
+    bool canShoot = true;
+    #endregion
+
     void Update()
     {
         Move();
         CheckIfCanDash();
         Dash();
+        CheckShoot();
+        Shoot();
     }
 
 
@@ -61,6 +64,16 @@ public class Player : MonoBehaviour
         }
     }
 
+    void Shoot(){
+        if(Input.GetKeyDown(KeyCode.Mouse0) && canShoot){
+            if(!doubleAttack){
+                Instantiate(bullet,firePoints[0].position,firePoints[0].rotation);
+            }
+            canShoot = false;
+        }
+        
+    }
+
     IEnumerator ActivateDash()
     {
         speed *= 4;
@@ -69,6 +82,19 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(dashTime);
         speed /= 4;
         dashing = false;
+    }
+
+    public void CheckShoot()
+    {
+        if(!canShoot){
+            timerShoot += Time.deltaTime;
+            if (timerShoot >= 0.3)
+            {
+                canShoot = true;
+                timerShoot = 0;
+            }
+        }
+        
     }
 
 
