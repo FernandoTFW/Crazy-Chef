@@ -112,6 +112,7 @@ MonoBehaviour:
   speed: 70
   damage: 100
   timeToDestroy: 10
+  expEffect: {fileID: 4190358863605760229, guid: a9d210b49c1acd64f85e25ede1d9da51, type: 3}
 --- !u!54 &6087170998976427230
 Rigidbody:
   m_ObjectHideFlags: 0

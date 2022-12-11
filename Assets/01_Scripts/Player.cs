@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
+    public Animator anim;
+
     #region properties
     public float hp = 100;
     #endregion
@@ -51,10 +53,16 @@ public class Player : MonoBehaviour
         movementDirection.Normalize();
         if(transform.position.x >= left && transform.position.x <= rigth){
             transform.Translate(movementDirection * speed * Time.deltaTime, Space.World);//Moverse
+            if(x >= 0.1 || x<= -0.1)
+                anim.SetFloat("rotate", x);
+            
+           
         } else if(transform.position.x < left){
             transform.position = new Vector3(left,transform.position.y,transform.position.z);
+           
         }else if(transform.position.x > rigth){
             transform.position = new Vector3(rigth,transform.position.y,transform.position.z);
+         
         }
         
 

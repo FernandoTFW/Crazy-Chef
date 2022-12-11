@@ -7,6 +7,8 @@ public class Bullet : MonoBehaviour
     public float speed = 10;
     public float damage = 10;
     public float timeToDestroy = 10;
+    public GameObject expEffect;
+
     //public AudioClip Sound;
     // Start is called before the first frame update
     void Start()
@@ -24,6 +26,7 @@ public class Bullet : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+            Instantiate(expEffect, transform.position, transform.rotation);
             Enemy e = other.gameObject.GetComponent<Enemy>();
             e.TakeDamage(damage);
             Debug.Log("enemigo dañado");
