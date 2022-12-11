@@ -5,6 +5,7 @@ using UnityEngine;
 public class Chef : MonoBehaviour
 {
     public GameObject linealEnemy;
+    public GameObject spawnEffect;
     public List<GameObject> patternEnemies;
     public Transform spawnPoint;
     public bool canSpawn = false;
@@ -47,6 +48,7 @@ public class Chef : MonoBehaviour
             {
                 timerSpawn = 0;
                 Instantiate(patternEnemies[type],spawnPoint.position,spawnPoint.rotation);
+                Instantiate(spawnEffect,spawnPoint.position,spawnPoint.rotation);
                 i++;
                 if(i>= quantity){
                     canSpawn = false;
