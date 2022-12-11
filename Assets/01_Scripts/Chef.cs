@@ -14,6 +14,7 @@ public class Chef : MonoBehaviour
     float quantity = 0;
     int i = 0;
     Transform target;
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
@@ -52,9 +53,12 @@ public class Chef : MonoBehaviour
     void Spawn(){
         if(canSpawn){
             timerSpawn += Time.deltaTime;
+            anim.SetTrigger("attack");
             if (timerSpawn >= 0.2)
             {
+               
                 timerSpawn = 0;
+               
                 Instantiate(patternEnemies[type],spawnPoint.position,spawnPoint.rotation);
                 Instantiate(spawnEffect,spawnPoint.position,spawnPoint.rotation);
                 i++;
