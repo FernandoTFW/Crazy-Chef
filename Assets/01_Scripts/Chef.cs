@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Chef : MonoBehaviour
 {
-    public GameObject linealEnemy;
     public GameObject spawnEffect;
     public List<GameObject> patternEnemies;
     public Transform spawnPoint;
@@ -14,17 +13,26 @@ public class Chef : MonoBehaviour
     public int type = 0;
     float quantity = 0;
     int i = 0;
+    Transform target;
     // Start is called before the first frame update
     void Start()
     {
-        
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+        Vector3  pos = new Vector3(target.position.x,spawnPoint.position.y,spawnPoint.position.z);
+        spawnPoint.position = pos;
     }
 
     // Update is called once per frame
     void Update()
     {
+        Move();
         CheckIfCanSpawn();
         Spawn();
+    }
+
+    void Move(){
+        Vector3  pos = new Vector3(target.position.x,transform.position.y,transform.position.z);
+        transform.position = pos;
     }
 
     void CheckIfCanSpawn()
@@ -44,7 +52,7 @@ public class Chef : MonoBehaviour
     void Spawn(){
         if(canSpawn){
             timerSpawn += Time.deltaTime;
-            if (timerSpawn >= 0.1)
+            if (timerSpawn >= 0.2)
             {
                 timerSpawn = 0;
                 Instantiate(patternEnemies[type],spawnPoint.position,spawnPoint.rotation);

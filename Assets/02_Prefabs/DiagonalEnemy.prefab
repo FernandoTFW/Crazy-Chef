@@ -124,5 +124,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 100
-  moveSpeed: 7
+  moveSpeed: 17
   damage: 5
