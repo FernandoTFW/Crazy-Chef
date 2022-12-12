@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     public Animator anim;
 
+    public static int Shield_PowerUp = 0;
+
     #region properties
-    public float hp = 100;
+    public static float hp = 100;
     #endregion
     #region Movement
     public Rigidbody rb;
@@ -28,18 +31,22 @@ public class Player : MonoBehaviour
     #region Attack
     public List<Transform> firePoints;
     public GameObject bullet;
-    public bool doubleAttack = false;
+    public static bool doubleAttack = false;
     public float timerShoot = 0;
     bool canShoot = true;
+
+    public float timeDoubleAttack = 0;
     #endregion
 
     #region Audio
     public AudioClip crashedSound, normalShoot, ketchupShoot, swooshSound;
     #endregion
 
+    public Slider hpBar;
+
     void Start() 
     {
-        
+        hpBar.maxValue = hp;
     }
     void Update()
     {
@@ -48,10 +55,20 @@ public class Player : MonoBehaviour
         Dash();
         CheckShoot();
         Shoot();
+        Time2Da();
         //AddingScore();
     }
 
-
+    void Time2Da() {
+        if(doubleAttack) {
+            if(timeDoubleAttack < 10) {
+                timeDoubleAttack += Time.deltaTime;
+            } else {
+                timeDoubleAttack = 0;
+                doubleAttack = false;
+            }
+        }
+    }
 
     void Move()
     {
@@ -64,13 +81,10 @@ public class Player : MonoBehaviour
             {
                 anim.SetFloat("rotate", x);
             }
-           
         } else if(transform.position.x < left){
             transform.position = new Vector3(left,transform.position.y,transform.position.z);
-           
         }else if(transform.position.x > rigth){
             transform.position = new Vector3(rigth,transform.position.y,transform.position.z);
-         
         }
         
 
@@ -116,12 +130,16 @@ public class Player : MonoBehaviour
     }
 
     public void TakeDamage(float damage){
-        hp -= damage;
-        Debug.Log("Player dañado");
-
-        GameManager.instance.PlaySFX(crashedSound);
-
-        if (hp <= 0){
+        if(Shield_PowerUp < 1){
+            hp -= damage;
+            hpBar.value = hp;
+            Debug.Log("Player dañado");
+            GameManager.instance.PlaySFX(crashedSound);
+        } else {
+            Shield_PowerUp--;
+            Debug.Log("Escudo dañado");
+        }
+        if(hp <= 0){
             SceneManager.LoadScene("LoseScreen");
         }
     }

@@ -33,6 +33,9 @@ public class Bullet : MonoBehaviour
             Scoring.AddScore(1);
 
             Destroyer();
+        }else if (other.gameObject.CompareTag("PowerUp"))
+        {
+            Destroyer();
         }
     }
 
