@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ScoreText: {fileID: 707464119}
-  maxWin: 50
+  maxWin: 5
   Score: {fileID: 707464117}
   YouText: {fileID: 1621349570}
 --- !u!1 &270111016
