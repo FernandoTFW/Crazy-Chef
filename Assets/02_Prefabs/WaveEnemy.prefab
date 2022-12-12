@@ -112,6 +112,8 @@ MonoBehaviour:
   hp: 100
   moveSpeed: 12
   damage: 5
+  powerUps:
+  - {fileID: 8504079795067565224, guid: 90baae4aed66fe34ea6d1feef6220b53, type: 3}
   expEffect: {fileID: 1995403933065894, guid: 97f14e85e76d07747b939162f4497666, type: 3}
 --- !u!114 &8318427187736525574
 MonoBehaviour:
