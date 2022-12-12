@@ -140,7 +140,23 @@ public class Player : MonoBehaviour
             Debug.Log("Escudo dañado");
         }
         if(hp <= 0){
-            SceneManager.LoadScene("LoseScreen");
+            if(Scoring.score < 50)
+            {
+                SceneManager.LoadScene("LoseScreen");
+            }
+            else if(Scoring.score >= 50 && Scoring.score < 100)
+            {
+                SceneManager.LoadScene("WinSceneHotDog");
+            }
+            else if (Scoring.score >= 100 && Scoring.score < 120)
+            {
+                SceneManager.LoadScene("WinSceneTaco");
+            }
+            else if (Scoring.score >= 120 )
+            {
+                SceneManager.LoadScene("WinScene");
+            }
+
         }
     }
 
