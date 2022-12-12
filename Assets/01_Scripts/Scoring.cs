@@ -7,7 +7,7 @@ public class Scoring : MonoBehaviour
 {
     public Text ScoreText;
     public static int score = 0;
-    public int maxWin;
+
 
     public GameObject Score;
     public GameObject YouText;
@@ -32,10 +32,6 @@ public class Scoring : MonoBehaviour
     {
         UpdateScore();
 
-        if (score == maxWin)
-        {
-            Score.SetActive(false);
-            YouText.SetActive(true);
-        }
+       
     }
 }
