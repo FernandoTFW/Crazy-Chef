@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     float dashTime = 1;
     bool dashing = false;
     public float left,rigth;
+    public Scoring scoring;
     #endregion
 
     #region timer
@@ -31,6 +32,11 @@ public class Player : MonoBehaviour
     public float timerShoot = 0;
     bool canShoot = true;
     #endregion
+
+    #region Audio
+    public AudioClip crashedSound, normalShoot, ketchupShoot, swooshSound;
+    #endregion
+
     void Start() 
     {
         
@@ -42,6 +48,7 @@ public class Player : MonoBehaviour
         Dash();
         CheckShoot();
         Shoot();
+        //AddingScore();
     }
 
 
@@ -84,6 +91,7 @@ public class Player : MonoBehaviour
     void Dash(){
         if(canPush && Input.GetKeyDown(KeyCode.E)){
             StartCoroutine(ActivateDash());
+            GameManager.instance.PlaySFX(swooshSound);
         }
     }
 
@@ -91,10 +99,13 @@ public class Player : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Mouse0) && canShoot){
             if(!doubleAttack){
                 Instantiate(bullet,firePoints[0].position,firePoints[0].rotation);
+                GameManager.instance.PlaySFX(normalShoot);
             }
-            else{
+            else
+            {
                 foreach(Transform a in firePoints){
                     Instantiate(bullet,a.position,a.rotation);
+                    GameManager.instance.PlaySFX(ketchupShoot);
                 }
             }
             canShoot = false;
@@ -105,7 +116,10 @@ public class Player : MonoBehaviour
     public void TakeDamage(float damage){
         hp -= damage;
         Debug.Log("Player dañado");
-        if(hp <= 0){
+
+        GameManager.instance.PlaySFX(crashedSound);
+
+        if (hp <= 0){
             SceneManager.LoadScene("LoseScreen");
         }
     }
@@ -132,6 +146,4 @@ public class Player : MonoBehaviour
         }
         
     }
-
-
 }
