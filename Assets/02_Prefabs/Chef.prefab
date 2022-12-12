@@ -280,6 +280,7 @@ MonoBehaviour:
   timerSpawn: 0
   type: 0
   anim: {fileID: 8343730037429476725}
+  chopping: {fileID: 8300000, guid: 7ac908030fd6d2045a451ee6d95c5cd0, type: 3}
 --- !u!95 &8343730037429476725
 Animator:
   serializedVersion: 3

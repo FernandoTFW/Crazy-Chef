@@ -15,6 +15,9 @@ public class Chef : MonoBehaviour
     int i = 0;
     Transform target;
     public Animator anim;
+
+    public AudioClip chopping;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,14 +54,15 @@ public class Chef : MonoBehaviour
         }
     }
     void Spawn(){
-        if(canSpawn){
+        if (canSpawn){
             timerSpawn += Time.deltaTime;
             anim.SetTrigger("attack");
+            
             if (timerSpawn >= 0.2)
             {
-               
+                GameManager.instance.PlaySFX(chopping);
                 timerSpawn = 0;
-               
+
                 Instantiate(patternEnemies[type],spawnPoint.position,spawnPoint.rotation);
                 Instantiate(spawnEffect,spawnPoint.position,spawnPoint.rotation);
                 i++;
