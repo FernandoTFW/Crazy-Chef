@@ -31,7 +31,6 @@ public class Scoring : MonoBehaviour
     void Update()
     {
         UpdateScore();
-
        
     }
 }

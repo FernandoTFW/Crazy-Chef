@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Shield_PowerUp : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public AudioClip sound;
+    public static bool shieldOn = false;
     void Start()
     {
         Destroy(gameObject, 10);
@@ -21,8 +22,10 @@ public class Shield_PowerUp : MonoBehaviour
         if (other.gameObject.CompareTag("Bullet"))
         {
             Debug.Log("Life powerUp active");
-            if(Player.Shield_PowerUp < 5){
-                Player.Shield_PowerUp = 5;
+            GameManager.instance.PlaySFX(sound);
+            shieldOn = true;
+            if (Player.shield_PowerUp < 5){
+                Player.shield_PowerUp = 5;
             }
             Destroyer();
         }

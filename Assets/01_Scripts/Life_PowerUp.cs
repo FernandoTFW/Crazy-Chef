@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Life_PowerUp : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public AudioClip sound;
     void Start()
     {
         Destroy(gameObject, 10);
@@ -23,7 +23,8 @@ public class Life_PowerUp : MonoBehaviour
             Debug.Log("Life powerUp active");
             if(Player.hp < 100){
                 Player.hp += 10;
-                if(Player.hp > 100)
+                GameManager.instance.PlaySFX(sound);
+                if (Player.hp > 100)
                 Player.hp = 100;
             }
             Destroyer();

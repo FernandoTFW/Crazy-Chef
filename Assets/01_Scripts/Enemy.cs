@@ -41,15 +41,15 @@ public class Enemy : MonoBehaviour
             
         }
     }
-    private void OnCollisionEnter(Collision other) {
-        if(other.gameObject.CompareTag("Player")){
-            Player p = other.gameObject.GetComponent<Player>();
-            p.TakeDamage(damage);
-            Instantiate(expEffect, transform.position, transform.rotation);
-            Destroy(gameObject);
+    //private void OnCollisionEnter(Collision other) {
+    //    if(other.gameObject.CompareTag("Player")){
+    //        Player p = other.gameObject.GetComponent<Player>();
+    //        p.TakeDamage(damage);
+    //        Instantiate(expEffect, transform.position, transform.rotation);
+    //        Destroy(gameObject);
             
-        }
-    }
+    //    }
+    //}
 
     
 }

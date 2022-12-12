@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet_PowerUp : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public AudioClip sound;
     void Start()
     {
         Destroy(gameObject, 10);
@@ -22,6 +22,7 @@ public class Bullet_PowerUp : MonoBehaviour
             if(!Player.doubleAttack){
                 Player.doubleAttack = true;
                 Debug.Log("Bullet powerUp active");
+                GameManager.instance.PlaySFX(sound);
             }
             Destroyer();
         }
