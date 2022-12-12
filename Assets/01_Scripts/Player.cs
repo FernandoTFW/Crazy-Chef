@@ -7,8 +7,10 @@ public class Player : MonoBehaviour
 {
     public Animator anim;
 
+    public static int Shield_PowerUp = 0;
+
     #region properties
-    public float hp = 100;
+    public static float hp = 100;
     #endregion
     #region Movement
     public Rigidbody rb;
@@ -27,9 +29,11 @@ public class Player : MonoBehaviour
     #region Attack
     public List<Transform> firePoints;
     public GameObject bullet;
-    public bool doubleAttack = false;
+    public static bool doubleAttack = false;
     public float timerShoot = 0;
     bool canShoot = true;
+
+    public float timeDoubleAttack = 0;
     #endregion
     void Start() 
     {
@@ -42,9 +46,19 @@ public class Player : MonoBehaviour
         Dash();
         CheckShoot();
         Shoot();
+        Time2Da();
     }
 
-
+    void Time2Da() {
+        if(doubleAttack) {
+            if(timeDoubleAttack < 10) {
+                timeDoubleAttack += Time.deltaTime;
+            } else {
+                timeDoubleAttack = 0;
+                doubleAttack = false;
+            }
+        }
+    }
 
     void Move()
     {
@@ -55,14 +69,10 @@ public class Player : MonoBehaviour
             transform.Translate(movementDirection * speed * Time.deltaTime, Space.World);//Moverse
             if(x >= 0.1 || x<= -0.1)
                 anim.SetFloat("rotate", x);
-            
-           
         } else if(transform.position.x < left){
             transform.position = new Vector3(left,transform.position.y,transform.position.z);
-           
         }else if(transform.position.x > rigth){
             transform.position = new Vector3(rigth,transform.position.y,transform.position.z);
-         
         }
         
 
@@ -103,8 +113,13 @@ public class Player : MonoBehaviour
     }
 
     public void TakeDamage(float damage){
-        hp -= damage;
-        Debug.Log("Player dañado");
+        if(Shield_PowerUp < 1){
+            hp -= damage;
+            Debug.Log("Player dañado");
+        } else {
+            Shield_PowerUp--;
+            Debug.Log("Escudo dañado");
+        }
         if(hp <= 0){
             SceneManager.LoadScene("LoseScreen");
         }
