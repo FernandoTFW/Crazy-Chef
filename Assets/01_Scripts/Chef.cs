@@ -11,6 +11,7 @@ public class Chef : MonoBehaviour
     public float timer = 0;
     public float timerSpawn = 0;
     public int type = 0;
+    public int typeAttack = 0;
     float quantity = 0;
     int i = 0;
     Transform target;
@@ -48,6 +49,7 @@ public class Chef : MonoBehaviour
             {
                 timer = 0;
                 type = Random.Range(0,patternEnemies.Count);
+                typeAttack = Random.Range(0,4);
                 quantity = Random.Range(6,10);
                 canSpawn = true;
             }
@@ -58,12 +60,33 @@ public class Chef : MonoBehaviour
             timerSpawn += Time.deltaTime;
             anim.SetTrigger("attack");
             
-            if (timerSpawn >= 0.2)
+            if (timerSpawn >= Dificulty.timeBtwFood)
             {
                 GameManager.instance.PlaySFX(chopping);
                 timerSpawn = 0;
-
-                Instantiate(patternEnemies[type],spawnPoint.position,spawnPoint.rotation);
+                if(type>=0 && type<=3 && Dificulty.dificultyMultiplier>=1.25){
+                    switch (typeAttack)
+                    {
+                        case 0:
+                            Instantiate(patternEnemies[0],spawnPoint.position,spawnPoint.rotation);
+                            Instantiate(patternEnemies[1],spawnPoint.position,spawnPoint.rotation);
+                        break;
+                        case 1:
+                            Instantiate(patternEnemies[2],spawnPoint.position,spawnPoint.rotation);
+                            Instantiate(patternEnemies[3],spawnPoint.position,spawnPoint.rotation);
+                        break;
+                        case 2:
+                            Instantiate(patternEnemies[1],spawnPoint.position,spawnPoint.rotation);
+                            Instantiate(patternEnemies[3],spawnPoint.position,spawnPoint.rotation);
+                        break;
+                        case 3:
+                            Instantiate(patternEnemies[type],spawnPoint.position,spawnPoint.rotation);
+                        break;
+                        
+                    }
+                }else{
+                    Instantiate(patternEnemies[type],spawnPoint.position,spawnPoint.rotation);
+                }
                 Instantiate(spawnEffect,spawnPoint.position,spawnPoint.rotation);
                 i++;
                 if(i>= quantity){

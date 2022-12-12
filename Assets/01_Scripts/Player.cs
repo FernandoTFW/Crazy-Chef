@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
     public float dashForce = 7;
     bool canPush = true;
     float dashTime = 1;
-    bool dashing = false;
     public float left,rigth;
     float x;
     #endregion
@@ -47,6 +46,7 @@ public class Player : MonoBehaviour
 
     void Start() 
     {
+        hp = 100;
         hpBar.maxValue = hp;
         shieldGroup.gameObject.SetActive(false);
     }
@@ -80,10 +80,7 @@ public class Player : MonoBehaviour
         movementDirection.Normalize();
         if(transform.position.x >= left && transform.position.x <= rigth){
             transform.Translate(movementDirection * speed * Time.deltaTime, Space.World);//Moverse
-            if(x >= 0.1 || x<= -0.1)
-            {
-                anim.SetFloat("rotate", x);
-            }
+            anim.SetFloat("rotate", x);
         } else if(transform.position.x < left){
             transform.position = new Vector3(left,transform.position.y,transform.position.z);
         }else if(transform.position.x > rigth){
@@ -149,17 +146,17 @@ public class Player : MonoBehaviour
             {
                 SceneManager.LoadScene("LoseScreen");
             }
-            else if(Scoring.score >= 50 && Scoring.score < 100)
+            else if(Scoring.score >= 100 && Scoring.score < 200)
             {
                 SceneManager.LoadScene("WinSceneHotDog");
             }
-            else if (Scoring.score >= 100 && Scoring.score < 120)
+            else if (Scoring.score >= 200 && Scoring.score < 250)
             {
                 SceneManager.LoadScene("WinSceneTaco");
             }
-            else if (Scoring.score >= 120 )
+            else if (Scoring.score >= 250 )
             {
-                SceneManager.LoadScene("WinScene");
+                SceneManager.LoadScene("WinScreen");
             }
 
         }
@@ -190,10 +187,8 @@ public class Player : MonoBehaviour
         }
         speed *= 4;
         canPush = false;
-        dashing = true;
         yield return new WaitForSeconds(dashTime);
         speed /= 4;
-        dashing = false;
     }
 
     public void CheckShoot()

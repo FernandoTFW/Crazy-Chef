@@ -12,6 +12,7 @@ public class Bullet : MonoBehaviour
 
     void Start()
     {
+        damage *= Dificulty.damageMultiplier;
         Destroy(gameObject, timeToDestroy);
     }
 
