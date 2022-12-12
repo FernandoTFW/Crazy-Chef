@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
     public float damage = 10;
     public float timeToDestroy = 10;
     public GameObject expEffect;
+    public AudioClip explosionEffect;
 
     void Start()
     {
@@ -37,6 +38,7 @@ public class Bullet : MonoBehaviour
 
     void Destroyer()
     {
+        GameManager.instance.PlaySFX(explosionEffect);
         Destroy(gameObject);
     }
 }
