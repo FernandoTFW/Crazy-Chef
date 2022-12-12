@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: a6bafc114a0e9e9498310107e38a38f7
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - anim: {instanceID: 0}
+  - rb: {instanceID: 0}
+  - bullet: {instanceID: 0}
+  - crashedSound: {fileID: 8300000, guid: aaae065c73e2fb6479f8d396769ddcec, type: 3}
+  - normalShoot: {fileID: 8300000, guid: 5848a4ed69b198f4e8b2efadd6c4dd62, type: 3}
+  - ketchupShoot: {fileID: 8300000, guid: 6e88e58d04d36df43bb5af39cb965caa, type: 3}
+  - swooshSound: {fileID: 8300000, guid: 245cea67ca4830a4fbd7fa06c4806df7, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
