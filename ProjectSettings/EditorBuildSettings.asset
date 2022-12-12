@@ -27,6 +27,12 @@ EditorBuildSettings:
     path: Assets/00_Scenes/LoseScreen.unity
     guid: 074377ecf4b1c7d42ba9b4c1edd017f7
   - enabled: 1
+    path: Assets/00_Scenes/WinSceneHotDog.unity
+    guid: 4ffaadecfc201664f979efae62b78b53
+  - enabled: 1
+    path: Assets/00_Scenes/WinSceneTaco.unity
+    guid: e522637dac1c4794da19d040319976ba
+  - enabled: 1
     path: Assets/00_Scenes/WinScreen.unity
     guid: c8098d304eeb60642b7e7693be5662c0
   m_configObjects: {}
