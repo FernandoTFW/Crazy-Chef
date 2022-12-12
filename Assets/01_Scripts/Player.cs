@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
@@ -37,9 +38,11 @@ public class Player : MonoBehaviour
     public AudioClip crashedSound, normalShoot, ketchupShoot, swooshSound;
     #endregion
 
+    public Slider hpBar;
+
     void Start() 
     {
-        
+        hpBar.maxValue = hp;
     }
     void Update()
     {
@@ -117,6 +120,7 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(float damage){
         hp -= damage;
+        hpBar.value = hp;
         Debug.Log("Player dañado");
 
         GameManager.instance.PlaySFX(crashedSound);
