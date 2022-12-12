@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
 {
     public Animator anim;
 
-    public static int Shield_PowerUp = 0;
+    public static int shield_PowerUp = 0;
 
     #region properties
     public static float hp = 100;
@@ -42,11 +42,13 @@ public class Player : MonoBehaviour
     public AudioClip crashedSound, normalShoot, ketchupShoot, swooshSound;
     #endregion
 
-    public Slider hpBar;
+    public Slider hpBar, shieldBar;
+    public GameObject shieldGroup;
 
     void Start() 
     {
         hpBar.maxValue = hp;
+        shieldGroup.gameObject.SetActive(false);
     }
     void Update()
     {
@@ -56,12 +58,13 @@ public class Player : MonoBehaviour
         CheckShoot();
         Shoot();
         Time2Da();
-        //AddingScore();
+        hpBar.value = hp;
+        CheckShield();
     }
 
     void Time2Da() {
         if(doubleAttack) {
-            if(timeDoubleAttack < 10) {
+            if(timeDoubleAttack < 15) {
                 timeDoubleAttack += Time.deltaTime;
             } else {
                 timeDoubleAttack = 0;
@@ -130,17 +133,32 @@ public class Player : MonoBehaviour
     }
 
     public void TakeDamage(float damage){
-        if(Shield_PowerUp < 1){
+        if(shield_PowerUp < 1){
+            Shield_PowerUp.shieldOn = false;
             hp -= damage;
             hpBar.value = hp;
             Debug.Log("Player dañado");
             GameManager.instance.PlaySFX(crashedSound);
         } else {
-            Shield_PowerUp--;
+            shieldBar.value = shield_PowerUp;
+            shield_PowerUp--;
             Debug.Log("Escudo dañado");
         }
         if(hp <= 0){
             SceneManager.LoadScene("LoseScreen");
+        }
+    }
+
+    public void CheckShield()
+    {
+        if (Shield_PowerUp.shieldOn)
+        {
+            shieldGroup.gameObject.SetActive(true);
+            shieldBar.value = shield_PowerUp;
+        }
+        else
+        {
+            shieldGroup.gameObject.SetActive(false);
         }
     }
 
