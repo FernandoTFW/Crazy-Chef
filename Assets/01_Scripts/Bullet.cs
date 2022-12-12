@@ -9,8 +9,6 @@ public class Bullet : MonoBehaviour
     public float timeToDestroy = 10;
     public GameObject expEffect;
 
-    //public AudioClip Sound;
-    // Start is called before the first frame update
     void Start()
     {
         Destroy(gameObject, timeToDestroy);
@@ -27,9 +25,12 @@ public class Bullet : MonoBehaviour
         if (other.gameObject.CompareTag("Enemy"))
         {
             Instantiate(expEffect, transform.position, transform.rotation);
+            
             Enemy e = other.gameObject.GetComponent<Enemy>();
             e.TakeDamage(damage);
             Debug.Log("enemigo dañado");
+            Scoring.AddScore(1);
+
             Destroyer();
         }else if (other.gameObject.CompareTag("PowerUp"))
         {
@@ -39,8 +40,6 @@ public class Bullet : MonoBehaviour
 
     void Destroyer()
     {
-        //GameManager.instance.PlaySFX(Sound);
-        //Instantiate(explosionEffect, transform.position, Quaternion.Euler(new Vector3(90, 0, 0)));
         Destroy(gameObject);
     }
 }

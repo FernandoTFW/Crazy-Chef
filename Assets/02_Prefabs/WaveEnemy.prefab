@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 8318427187736525624}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -114,6 +114,7 @@ MonoBehaviour:
   damage: 5
   powerUps:
   - {fileID: 8504079795067565224, guid: 90baae4aed66fe34ea6d1feef6220b53, type: 3}
+  expEffect: {fileID: 1995403933065894, guid: 97f14e85e76d07747b939162f4497666, type: 3}
 --- !u!114 &8318427187736525574
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     float dashTime = 1;
     bool dashing = false;
     public float left,rigth;
+    float x;
     #endregion
 
     #region timer
@@ -35,6 +36,11 @@ public class Player : MonoBehaviour
 
     public float timeDoubleAttack = 0;
     #endregion
+
+    #region Audio
+    public AudioClip crashedSound, normalShoot, ketchupShoot, swooshSound;
+    #endregion
+
     void Start() 
     {
         
@@ -47,6 +53,7 @@ public class Player : MonoBehaviour
         CheckShoot();
         Shoot();
         Time2Da();
+        //AddingScore();
     }
 
     void Time2Da() {
@@ -62,13 +69,15 @@ public class Player : MonoBehaviour
 
     void Move()
     {
-        float x = Input.GetAxis("Horizontal");
+        x = Input.GetAxis("Horizontal");
         Vector3 movementDirection = new Vector3(x, 0, 0);
         movementDirection.Normalize();
         if(transform.position.x >= left && transform.position.x <= rigth){
             transform.Translate(movementDirection * speed * Time.deltaTime, Space.World);//Moverse
             if(x >= 0.1 || x<= -0.1)
+            {
                 anim.SetFloat("rotate", x);
+            }
         } else if(transform.position.x < left){
             transform.position = new Vector3(left,transform.position.y,transform.position.z);
         }else if(transform.position.x > rigth){
@@ -94,6 +103,7 @@ public class Player : MonoBehaviour
     void Dash(){
         if(canPush && Input.GetKeyDown(KeyCode.E)){
             StartCoroutine(ActivateDash());
+            GameManager.instance.PlaySFX(swooshSound);
         }
     }
 
@@ -101,10 +111,14 @@ public class Player : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Mouse0) && canShoot){
             if(!doubleAttack){
                 Instantiate(bullet,firePoints[0].position,firePoints[0].rotation);
+                GameManager.instance.PlaySFX(normalShoot);
+                anim.SetTrigger("shoot");
             }
-            else{
+            else
+            {
                 foreach(Transform a in firePoints){
                     Instantiate(bullet,a.position,a.rotation);
+                    GameManager.instance.PlaySFX(ketchupShoot);
                 }
             }
             canShoot = false;
@@ -116,6 +130,7 @@ public class Player : MonoBehaviour
         if(Shield_PowerUp < 1){
             hp -= damage;
             Debug.Log("Player dañado");
+            GameManager.instance.PlaySFX(crashedSound);
         } else {
             Shield_PowerUp--;
             Debug.Log("Escudo dañado");
@@ -127,6 +142,14 @@ public class Player : MonoBehaviour
 
     IEnumerator ActivateDash()
     {
+        if (x >= 0.1)
+        {
+            anim.SetTrigger("dashR");
+        }
+        else if(x <= -0.1)
+        {
+            anim.SetTrigger("dashL");
+        }
         speed *= 4;
         canPush = false;
         dashing = true;
@@ -147,6 +170,4 @@ public class Player : MonoBehaviour
         }
         
     }
-
-
 }
