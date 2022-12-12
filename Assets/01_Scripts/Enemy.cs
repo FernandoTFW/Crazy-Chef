@@ -24,7 +24,10 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(float damage){
         hp -= damage;
         if(hp <= 0){
-            Instantiate(powerUps[0],transform.position,transform.rotation);
+            int p = Random.Range(1, 10);
+            if(p > 7){
+                Instantiate(powerUps[0],transform.position,transform.rotation);
+            }
             Destroy(gameObject);
         }
     }

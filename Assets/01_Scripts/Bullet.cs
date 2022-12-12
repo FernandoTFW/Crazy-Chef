@@ -31,6 +31,9 @@ public class Bullet : MonoBehaviour
             e.TakeDamage(damage);
             Debug.Log("enemigo dañado");
             Destroyer();
+        }else if (other.gameObject.CompareTag("PowerUp"))
+        {
+            Destroyer();
         }
     }
 
