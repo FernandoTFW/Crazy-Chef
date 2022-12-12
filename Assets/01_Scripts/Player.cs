@@ -18,7 +18,7 @@ public class Player : MonoBehaviour
     float dashTime = 1;
     bool dashing = false;
     public float left,rigth;
-    public Scoring scoring;
+    float x;
     #endregion
 
     #region timer
@@ -55,14 +55,15 @@ public class Player : MonoBehaviour
 
     void Move()
     {
-        float x = Input.GetAxis("Horizontal");
+        x = Input.GetAxis("Horizontal");
         Vector3 movementDirection = new Vector3(x, 0, 0);
         movementDirection.Normalize();
         if(transform.position.x >= left && transform.position.x <= rigth){
             transform.Translate(movementDirection * speed * Time.deltaTime, Space.World);//Moverse
             if(x >= 0.1 || x<= -0.1)
+            {
                 anim.SetFloat("rotate", x);
-            
+            }
            
         } else if(transform.position.x < left){
             transform.position = new Vector3(left,transform.position.y,transform.position.z);
@@ -100,6 +101,7 @@ public class Player : MonoBehaviour
             if(!doubleAttack){
                 Instantiate(bullet,firePoints[0].position,firePoints[0].rotation);
                 GameManager.instance.PlaySFX(normalShoot);
+                anim.SetTrigger("shoot");
             }
             else
             {
@@ -126,6 +128,14 @@ public class Player : MonoBehaviour
 
     IEnumerator ActivateDash()
     {
+        if (x >= 0.1)
+        {
+            anim.SetTrigger("dashR");
+        }
+        else if(x <= -0.1)
+        {
+            anim.SetTrigger("dashL");
+        }
         speed *= 4;
         canPush = false;
         dashing = true;
