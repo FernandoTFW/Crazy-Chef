@@ -272,7 +272,9 @@ MonoBehaviour:
   spawnEffect: {fileID: 2505190263935637451, guid: 3e1bd797cdbb5074094d6944da7f0d71, type: 3}
   patternEnemies:
   - {fileID: 6594377928542940668, guid: 280d722f0d23d4849bf5398d6a129b8c, type: 3}
+  - {fileID: 3854369836402604364, guid: af83cfcfba2d5d44c9a0774a5a8fb239, type: 3}
   - {fileID: 8318427187736525624, guid: 85878d4e23369c6408c091502c7de233, type: 3}
+  - {fileID: 4363024248695577590, guid: 0036386ad10acbb419132cc224ee11ba, type: 3}
   - {fileID: 4324753639973589432, guid: 32261c45ee0164a40af9ce1a0a6bed11, type: 3}
   spawnPoint: {fileID: 3389113109595606252}
   canSpawn: 0

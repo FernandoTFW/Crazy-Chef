@@ -12,7 +12,9 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        moveSpeed *= Dificulty.dificultyMultiplier;
+        hp *= Dificulty.dificultyMultiplier;
+        Destroy(gameObject, 15);
     }
 
     // Update is called once per frame
